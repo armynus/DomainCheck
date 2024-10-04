@@ -29,7 +29,7 @@
               </a>
               <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Basic Elements</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{{route('form')}}">Basic Elements</a></li>
                 </ul>
               </div>
             </li>
@@ -77,11 +77,11 @@
               </a>
               <div class="collapse" id="auth">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#"> Blank Page </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{route('404')}}"> 404 </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{route('500')}}"> 500 </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{route('login')}}"> Login </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{route('register')}}"> Register </a></li>
                 </ul>
               </div>
             </li>
