@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .                # Thiết lập context là thư mục gốc dự án
+      dockerfile: docker/Dockerfile  # Đường dẫn tới Dockerfile trong thư mục docker
+    container_name: laravel_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - laravel
+
+  webserver:
+    image: nginx:alpine
+    container_name: nginx_webserver
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - laravel
+
+  db:
+    image: mysql:8.2
+    container_name: mysql_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: domain_check
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
+    networks:
+      - laravel
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - "8081:80"
+    environment:
+      - PMA_HOSTS=mysql_db    # Sử dụng đúng tên container MySQL
+      - PMA_PORT=3306
+      - PMA_USER=user
+      - PMA_PASSWORD=password
+    depends_on:
+      - db  # Đảm bảo db (MySQL) chạy trước
+    networks:
+      - laravel
+
+networks:
+  laravel:
+    name: laravel  # Đặt tên cụ thể cho mạng
+
+volumes:
+  dbdata:
